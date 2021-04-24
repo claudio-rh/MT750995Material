@@ -1,7 +1,7 @@
 import numpy as np
 import tqdm
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() 
+tf.disable_v2_behavior()
 import os
 
 class OS_ELM(object):
@@ -15,7 +15,7 @@ class OS_ELM(object):
         else:
             self.name = name
 
-        self.__sess = tf.compat.v1.Session()
+        self.__sess = tf.Session()
         self.__n_input_nodes = n_input_nodes
         self.__n_hidden_nodes = n_hidden_nodes
         self.__n_output_nodes = n_output_nodes
@@ -44,7 +44,7 @@ class OS_ELM(object):
                 'an unknown loss function \'%s\' was given. ' % loss
             )
 
-        self.__is_finished_init_train = tf.compat.v1.get_variable(
+        self.__is_finished_init_train = tf.get_variable(
             'is_finished_init_train',
             shape=[],
             dtype=bool,
@@ -52,25 +52,25 @@ class OS_ELM(object):
         )
         self.__x = tf.placeholder(tf.float32, shape=(None, self.__n_input_nodes), name='x')
         self.__t = tf.placeholder(tf.float32, shape=(None, self.__n_output_nodes), name='t')
-        self.__alpha = tf.compat.v1.get_variable(
+        self.__alpha = tf.get_variable(
             'alpha',
             shape=[self.__n_input_nodes, self.__n_hidden_nodes],
             initializer=tf.random_uniform_initializer(-1,1),
             trainable=False,
         )
-        self.__bias = tf.compat.v1.get_variable(
+        self.__bias = tf.get_variable(
             'bias',
             shape=[self.__n_hidden_nodes],
             initializer=tf.random_uniform_initializer(-1,1),
             trainable=False,
         )
-        self.__beta = tf.compat.v1.get_variable(
+        self.__beta = tf.get_variable(
             'beta',
             shape=[self.__n_hidden_nodes, self.__n_output_nodes],
             initializer=tf.zeros_initializer(),
             trainable=False,
         )
-        self.__p = tf.compat.v1.get_variable(
+        self.__p = tf.get_variable(
             'p',
             shape=[self.__n_hidden_nodes, self.__n_hidden_nodes],
             initializer=tf.zeros_initializer(),

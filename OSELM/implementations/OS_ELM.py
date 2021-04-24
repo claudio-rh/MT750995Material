@@ -178,5 +178,5 @@ class OS_ELM(object):
 			if np.argmax(Y) + self.ran[1] == int(row[label_index]):
 				correct += 1
 			sum += 1
-		print("%s准确性为：%f" % (text, correct / sum))
+		#print("%sPrecision-Error：%f" % (text, correct / sum))
 		return correct / sum
